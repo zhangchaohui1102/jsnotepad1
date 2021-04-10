@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <title>jsnotepad部分功能</title>
+    <!--状态栏-->
+    <link rel="stylesheet" href="./css/norms.css">
+    <link rel="stylesheet" href="./css/statusbar.css">
+    <!--菜单栏-->
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/about.css">
+    <link rel="stylesheet" href="./css/menubar.css">
+    <!--编辑区-->
+    <link rel="stylesheet" href="./css/editor.css">
+    <!--字体对话框-->
+    <link rel="stylesheet" href="./css/list.css">
+    <link rel="stylesheet" href="./css/font.css">
+    </head>
+    <body>
+    <!--菜单栏-->
+        <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="//cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script src="./js/app.js"></script>
+        <script src="./js/menu.js"></script>
+        <script src="./js/about.js"></script>
+        <script src="./js/menubar.js"></script>
+        <!--编辑区-->
+        <script src="./js/editor.js"></script>
+        <!--状态栏-->
+        <script src="./js/statusbar.js"></script>
+        <!--对话框-->
+        <script src="./js/list.js"></script>
+        <script src="./js/font.js"></script>
+        <script>
+            $(function() {
+                //菜单栏
+                $statusBar.init();
+                $statusBar.display(false);
+                $menubar.enabled(4, 0, false);
+                $menubar.enabled(1, 0, true);
+                //编辑区
+                $editor.show();
+                //状态栏
+                var bVisable = true;
+                $statusBar.init({row: 300, col: 100});
+
+                var $btnTest = $('#btn-test');
+
+                $btnTest.click(function() {
+                bVisable = !bVisable;
+                $statusBar.display(bVisable);
+
+                var title = bVisable ? '隐藏状态栏' : '显示状态栏';
+                $btnTest.val(title);
+                });
+
+                var $btnSetRC = $('#set-rc');
+
+                $btnSetRC.click(function() {
+                $statusBar.setRowCol($('#row').val(), $('#col').val());
+                });
+                //对话框
+                $btnTest = $('div.test>input[type="button"]');
+
+                $btnTest.click(function() {
+                $dlgFont.show({
+                    okHandler: function(e) {
+                    console.log(e);
+                    }
+                });
+                });
+            });
+        </script>
+    </body>
+</html>
